@@ -1,0 +1,23 @@
+# .htaccess - UPDATE untuk Docker
+# Docker menggunakan Apache, jadi semua fitur berfungsi
+
+# === REWRITE RULES (Pretty URLs) ===
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# === PHP SETTINGS ===
+php_value memory_limit 512M
+php_value max_execution_time 300
+php_value max_input_time 300
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+
+# === SECURITY ===
+<FilesMatch "\.(log|db|json|lock|sqlite|sqlite3)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+Options -Indexes
