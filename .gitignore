@@ -1,0 +1,54 @@
+# FilzTok Pro v4.0 .gitignore
+# File ini MENCEGAH folder/file tertentu di-upload ke GitHub
+
+# === CACHE & TEMP FILES ===
+cache/
+*.lock
+*.tmp
+*.zip
+/tmp/
+
+# === LOG FILES ===
+*.log
+logs/
+*.log.*
+lib/ErrorLogger.php.log
+
+# === DATABASE ===
+*.db
+*.sqlite
+*.sqlite3
+analytics.db
+
+# === ENVIRONMENT FILES ===
+.env
+.env.local
+*.ini
+
+# === OS FILES ===
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# === EDITOR FILES ===
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# === DEPENDENCIES ===
+vendor/
+composer.lock
+
+# === BACKUP FILES ===
+*.bak
+*.backup
+*.old
+
+# === TEST FILES ===
+test/
+tests/
+*.test.php
