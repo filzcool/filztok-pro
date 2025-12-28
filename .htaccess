@@ -1,0 +1,37 @@
+# .htaccess - FilzTok Pro v4.0
+# File ini untuk konfigurasi server Apache/Render.com
+
+# === REWRITE RULES (Pretty URLs) ===
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# === PHP SETTINGS (Naikkan Limit) ===
+php_value memory_limit 512M
+php_value max_execution_time 300
+php_value max_input_time 300
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+
+# === SECURITY (Lindungi File Sensitif) ===
+<FilesMatch "\.(log|db|json|lock|sqlite|sqlite3)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+# === PREVENT DIRECTORY LISTING ===
+Options -Indexes
+
+# === CORS HEADERS (Untuk API) ===
+<IfModule mod_headers.c>
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "POST, GET, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type, X-CSRF-Token"
+</IfModule>
+
+# === COMPRESSION (Optional - Speed up) ===
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+AddOutputFilterByType DEFLATE application/javascript application/json
+</IfModule>
