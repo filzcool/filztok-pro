@@ -1,0 +1,30 @@
+# Dockerfile - FilzTok Pro v4.0
+# Menggunakan PHP 8.2 Alpine (ringan & cepat)
+
+FROM php:8.2-apache
+
+# Install extensions yang dibutuhkan
+RUN docker-php-ext-install pdo pdo_mysql sockets
+
+# Install SQLite3 (untuk analytics)
+RUN apk add --no-cache sqlite
+
+# Enable Apache modules
+RUN a2enmod rewrite headers
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy semua file ke container
+COPY . /var/www/html/
+
+# Set permission untuk folder cache
+RUN mkdir -p /tmp/filztok_cache && chmod 777 /tmp/filztok_cache
+
+# Set environment variables
+ENV CACHE_DIR=/tmp/filztok_cache
+ENV RATE_LIMIT=10
+ENV RATE_WINDOW=60
+
+# Expose port 80 (Render otomatis map ke 10000)
+EXPOSE 80
